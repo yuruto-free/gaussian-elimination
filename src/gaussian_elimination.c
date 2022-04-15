@@ -16,7 +16,8 @@
  * \retval RETURN_OK_GE 正常終了
  * \retval RETURN_NG_GE 異常終了
  */
-static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix, int32_t *pivot);
+static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix,
+                               int32_t *pivot);
 /*
  * \brief 入れ替え処理
  * \param[in]    dim    次元数
@@ -27,7 +28,8 @@ static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix, int32_t
  * \retval RETURN_OK_GE 正常終了
  * \retval RETURN_NG_GE 異常終了
  */
-static int32_t swap(int32_t dim, int32_t row, int32_t pivot, double *matrix, double *vec);
+static int32_t swap(int32_t dim, int32_t row, int32_t pivot, double *matrix,
+                    double *vec);
 
 int32_t GE_gauss_solver(int32_t dim, double *matrix, double *vec) {
     int32_t ret = (int32_t)GE_NG;
@@ -83,7 +85,8 @@ EXIT_GE_SOLVER:
     return ret;
 }
 
-static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix, int32_t *pivot) {
+static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix,
+                               int32_t *pivot) {
     int32_t ret = (int32_t)RETURN_NG_GE;
     int32_t i;
     int32_t p;
@@ -92,7 +95,7 @@ static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix, int32_t
     if ((NULL != matrix) && (NULL != pivot)) {
         /* 対角成分の絶対値が最大値となると仮定 */
         max_val = fabs(matrix[col * dim + col]);
-        p = col;
+        p       = col;
 
         /* 対角成分より下側の値のうち、絶対が最大となるものを探索 */
         for (i = col + 1; i < dim; i++) {
@@ -100,17 +103,18 @@ static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix, int32_t
 
             if (max_val < val) {
                 max_val = val;
-                p = i;
+                p       = i;
             }
         }
         (*pivot) = p;
-        ret = (int32_t)RETURN_OK_GE;
+        ret      = (int32_t)RETURN_OK_GE;
     }
 
     return ret;
 }
 
-static int32_t swap(int32_t dim, int32_t row, int32_t pivot, double *matrix, double *vec) {
+static int32_t swap(int32_t dim, int32_t row, int32_t pivot, double *matrix,
+                    double *vec) {
     int32_t ret = (int32_t)RETURN_NG_GE;
     int32_t col;
     double tmp;
@@ -118,15 +122,15 @@ static int32_t swap(int32_t dim, int32_t row, int32_t pivot, double *matrix, dou
     if ((NULL != matrix) && (NULL != vec)) {
         /* 行の入れ替え */
         for (col = 0; col < dim; col++) {
-            tmp = matrix[row * dim + col];
-            matrix[row * dim + col] = matrix[pivot * dim + col];
+            tmp                       = matrix[row * dim + col];
+            matrix[row * dim + col]   = matrix[pivot * dim + col];
             matrix[pivot * dim + col] = tmp;
         }
         /* 右辺ベクトルの入れ替え */
-        tmp = vec[row];
-        vec[row] = vec[pivot];
+        tmp        = vec[row];
+        vec[row]   = vec[pivot];
         vec[pivot] = tmp;
-        ret = (int32_t)RETURN_OK_GE;
+        ret        = (int32_t)RETURN_OK_GE;
     }
 
     return ret;
