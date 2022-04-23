@@ -6,7 +6,7 @@
 #define GE_OK (0)
 #define GE_NG (1)
 
-/*
+/**
  * \brief ガウスの消去法
  * \param[in]    dim    次元数
  * \param[in]    matrix 係数行列
