@@ -7,7 +7,7 @@
 #define RETURN_NG_GE (1)
 #define MEPS_GE (1e-10)
 
-/*
+/**
  * \brief ピボット選択
  * \param[in]  dim    次元数
  * \param[in]  col    対象列
@@ -18,7 +18,7 @@
  */
 static int32_t pivot_selection(int32_t dim, int32_t col, double *matrix,
                                int32_t *pivot);
-/*
+/**
  * \brief 入れ替え処理
  * \param[in]    dim    次元数
  * \param[in]    row    入れ替え元の行
